@@ -1,276 +1,272 @@
-// =============================================================================
-// HEADER (CSS)
-//
-// 1. Setting font size of header-logo to 0, since wrapper element may vary, and
-//    inline-block whitespace messes with header height. Font-size is reset to
-//    appropriate size on header-logo-text.
-// 2. Needs left/right margin so it doesn't cover left/right nav bar toggles
-// 3. Offset the letter-spacing on the last character by adding a right negative
-//    margin. This centers the text logo properly.
-// 4. When the word "cart" is added to the mobile header's cart link, add more
-//    margin to compensate.
-// 5. When logo size is set to "original", we don't have advance knowledge of the
-//    image size, so we can't use absolute positioning + padding to reserve space
-//    for lazy loading.
-// 6. When logo size is set to "original" and switch to mobile version, it keeps
-//    content in center regardless its size.
-//
-// -----------------------------------------------------------------------------
+.header {
+    background: #fff;
+    border-bottom: 1px solid #dcdcdc;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    position: relative
+}
 
-.skip-to-main-link {
-    background: $header-bg;
-    color: $color-textBase;
-    font-weight: 700;
-    left: 50%;
-    padding: 4px;
-    position: absolute;
-    transform: translate(-50%, calc(-100% - #{$header-height}));
-    transition: transform 0.3s;
-    z-index: zIndex("highest");
+.header--scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0
+}
 
-    &:focus {
-        transform: translate(-50%, 0%);
+.fPage--default .header,.fPage--hero .header {
+    background: 0 0;
+    position: fixed;
+    border: none
+}
+
+.fPage--default .header,.fPage--default .header *,.fPage--hero .header,.fPage--hero .header * {
+    color: #fff
+}
+
+.fPage--default .header--scrolled,.fPage--default .header.is-open,.fPage--default .header:focus,.fPage--default .header:hover,.fPage--hero .header--scrolled,.fPage--hero .header.is-open,.fPage--hero .header:focus,.fPage--hero .header:hover {
+    background: #fff;
+    border-bottom: 1px solid #dcdcdc
+}
+
+.fPage--default .header--scrolled,.fPage--default .header--scrolled *,.fPage--default .header.is-open,.fPage--default .header.is-open *,.fPage--default .header:focus,.fPage--default .header:focus *,.fPage--default .header:hover,.fPage--default .header:hover *,.fPage--hero .header--scrolled,.fPage--hero .header--scrolled *,.fPage--hero .header.is-open,.fPage--hero .header.is-open *,.fPage--hero .header:focus,.fPage--hero .header:focus *,.fPage--hero .header:hover,.fPage--hero .header:hover * {
+    color: #383640
+}
+
+@media (min-width: 551px) {
+    .header {
+        height:180px
     }
 }
 
-.header {
-    background-color: $header-bg;
-    border-bottom: container("border");
-    height: $header-height;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: zIndex("higher");
-
-    @include breakpoint("medium") {
-        border-bottom: container("border");
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        overflow: visible;
-        position: relative;
+@media (min-width: 801px) {
+    .header {
+        height:160px
     }
 
-    &.is-open {
-        height: 100%;
+    .header.header--scrolled {
+        height: 100px
+    }
 
-        @include breakpoint("medium") {
-            height: auto;
-        }
+    .header.header--scrolled .header-logo {
+        height: 100px
+    }
+
+    .header.header--scrolled .header-logo__link {
+        height: 70px;
+        width: 100px
     }
 }
 
 .header-logo {
-    font-size: 0;   // 1
-    height: $header-height;
-    margin: 0 remCalc($header-toggle-width); // 2
-    text-align: center;
-
-    @include breakpoint("small") { // 4
-        margin-left: remCalc($header-toggle-width * 1.5);
-        margin-right: remCalc($header-toggle-width * 1.5);
-    }
-
-    @include breakpoint("medium") {
-        height: auto;
-        margin: (spacing("double") + spacing("base")) auto (spacing("double") + spacing("single"));
-        padding: 0;
-
-        .header.fixed & {
-            background-color: color("greys", "lightest");
-            margin: 0;
-            padding: spacing("quarter") 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
-    }
-
-    &__link {
-        @include clearfix;
-        align-items: center;
-        color: $storeName-color;
-        display: flex;
-        height: inherit;
-        justify-content: center; // 6
-        margin: 0 auto;
-        position: relative;
-        text-decoration: none;
-        width: 70%;
-        z-index: zIndex("low");
-
-        @include breakpoint("medium") {
-            background: none;
-            border-bottom: 0;
-            display: inline-flex;
-            padding: 0;
-            width: auto;
-        }
-
-        &:hover {
-            color: color("link", "hover");
-        }
-
-        &:active {
-            color: color("link", "active");
-        }
-    }
-}
-
-.header-logo--left {
-    text-align: left;
-
-    @include breakpoint("medium") {
-        margin-left: remCalc(40px);
-    }
-
-    .header-logo-image {
-        right: unset;
-    }
-}
-
-.header-logo--right {
-    text-align: right;
-
-    @include breakpoint("medium") {
-        margin-right: remCalc(40px);
-    }
-
-    .header-logo-image {
-        left: unset;
-    }
-}
-
-.header-logo-text {
-    display: block;
-    font-family: $fontFamily-hero;
-    font-size: $fontSize-logo-small;   // 1
-    font-weight: stencilFontWeight("headings-font");
-    letter-spacing: remCalc(2px);
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
-    white-space: nowrap;
-
-    @include breakpoint("small") {
-        font-size: $fontSize-logo-medium;
-    }
-
-    @include breakpoint("medium") {
-        display: inline;
-        font-size: $fontSize-logo-large;
-        max-width: none;
-        overflow: auto;
-        padding: 0 10px;
-        white-space: normal;
-
-        .header.fixed & {
-            font-size: fontSize("larger");
-        }
-    }
-}
-
-.header-logo-image-container {
-    position: relative;
+    height: 120px;
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0
+}
 
-    @include breakpoint("medium") {
-        min-height: get-height(stencilString("logo_size"));
+@media (min-width: 551px) {
+    .header-logo {
+        height:180px
     }
 }
 
-.header-logo-image-container::after {
-    content: "";
-    display: block;
-}
-
-.header-logo-image {
-    display: block;
-    margin: 0 auto;
-    max-height: remCalc($header-height) - $header-logo-marginVertical * 2;
-
-    @include breakpoint("medium") {
-        max-height: none;
+@media (min-width: 801px) {
+    .header-logo {
+        height:160px
     }
 }
 
-.header-logo-image-unknown-size { // 5
-    max-height: remCalc($header-height) - $header-logo-marginVertical * 2;
+.header-logo__link {
+    background: url("../img/logo-dark.svg") no-repeat;
+    background-size: contain;
+    text-indent: -10000px;
+    width: 122px;
+    height: 80px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}
 
-    @include breakpoint("medium") {
-        max-height: none;
+.header-logo__link:after,.header-logo__link:before {
+    display: none
+}
+
+@media (min-width: 551px) {
+    .header-logo__link {
+        width:153px;
+        height: 100px
     }
 }
 
-//
-// Mobile Menu Toggle
-//
-// 1. Animate lines from 'x' to hamburger
-// -----------------------------------------------------------------------------
+.header--scrolled[class] .header-logo__link,.header.is-open .header-logo__link,.header:focus .header-logo__link,.header:hover .header-logo__link {
+    background-image: url("../img/logo-dark.svg")
+}
+
+.fPage--default .header-logo__link,.fPage--hero .header-logo__link {
+    background-image: url("../img/logo-light.svg")
+}
+
+.shopping-bag {
+    display: none;
+    position: absolute;
+    top: 2.8125rem;
+    right: 1rem;
+    z-index: 100
+}
+
+.shopping-bag.is-visible {
+    display: block
+}
+
+@media (min-width: 551px) {
+    .shopping-bag {
+        top:4.75rem
+    }
+}
+
+@media (min-width: 801px) {
+    .shopping-bag {
+        top:4.1875rem
+    }
+}
+
+@media (min-width: 1081px) {
+    .shopping-bag {
+        top:1rem
+    }
+}
+
+.shopping-bag__link {
+    display: inline-block;
+    height: 1.8rem;
+    width: 1.8rem;
+    text-decoration: none
+}
+
+.shopping-bag__link .icon {
+    stroke: #383640;
+    height: 100%;
+    width: 100%
+}
+
+.fPage--default .header .shopping-bag__link .icon {
+    stroke: #ffffff
+}
+
+.fPage--default .header--scrolled .shopping-bag__link .icon,.fPage--default .header:hover .shopping-bag__link .icon {
+    stroke: #383640
+}
+
+.shopping-bag__badge {
+    position: absolute;
+    top: -.3125rem;
+    right: -.3125rem;
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+    text-align: center;
+    font-size: 11px;
+    background: #bfa380
+}
+
+.shopping-bag__label {
+    text-transform: uppercase;
+    text-decoration: none;
+    vertical-align: bottom
+}
 
 .mobileMenu-toggle {
-    @include square($header-toggle-width);
-    display: inline-block;
-    font-size: 0;
-    left: 0;
-    overflow: hidden;
-    padding: 0 remCalc(18);
+    height: 120px;
+    width: auto;
+    font-size: inherit;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0 1.5rem
+}
+
+@media (min-width: 551px) {
+    .mobileMenu-toggle {
+        height:180px
+    }
+}
+
+@media (min-width: 801px) {
+    .mobileMenu-toggle {
+        height:160px;
+        padding: 0 2.25rem
+    }
+}
+
+@media (min-width: 1081px) {
+    .mobileMenu-toggle {
+        display:none
+    }
+}
+
+.mobileMenu-toggle__close,.mobileMenu-toggle__text {
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}
+
+.is-open .mobileMenu-toggle__text {
+    opacity: 0
+}
+
+.mobileMenu-toggle__close {
+    display: block;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
     position: absolute;
-    z-index: zIndex("high");
+    opacity: 0
+}
 
-    @include breakpoint("medium") {
-        display: none;
-    }
+.is-open .mobileMenu-toggle__close {
+    opacity: 1
+}
 
-    .mobileMenu-toggleIcon,
-    .mobileMenu-toggleIcon::before,
-    .mobileMenu-toggleIcon::after {
-        background: $header-font-color;
-        content: "";
-        display: block;
-        height: 2px;
-        position: absolute;
-        transform: rotate(0deg);
-        transition: transform 100ms ease-in, top 100ms ease-in 150ms, bottom 100ms ease-in 150ms; // 1
-        width: remCalc(20);
-    }
+.mobileMenu-toggle__bar {
+    padding: 0;
+    width: 30px;
+    height: 2px;
+    background-color: currentColor;
+    display: block;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    position: absolute
+}
 
-    .mobileMenu-toggleIcon {
-        top: remCalc(27);
-        transition: background-color 10ms ease-in 100ms;
-    }
+.mobileMenu-toggle__bar--2,.mobileMenu-toggle__bar--3 {
+    top: 13.5px
+}
 
-    .mobileMenu-toggleIcon::before {
-        top: -0.5rem;
-    }
+.mobileMenu-toggle__bar--3 {
+    right: 0
+}
 
-    .mobileMenu-toggleIcon::after {
-        bottom: -0.5rem;
-    }
+.is-open .mobileMenu-toggle__bar--2 {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg)
+}
 
-    &.is-open .mobileMenu-toggleIcon {
-        background-color: transparent;
-        transition-delay: 100ms;
-
-        &::before,
-        &::after {
-            background-color: $header-font-color;
-            bottom: auto;
-            top: auto;
-            transition: transform 100ms ease-in 150ms, top 100ms ease-in, bottom 100ms ease-in; // Animate lines from hamburger to 'x'
-        }
-
-        &::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        &::after {
-            bottom: 0;
-            transform: rotate(-45deg);
-        }
-
-    }
+.is-open .mobileMenu-toggle__bar--3 {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg)
 }

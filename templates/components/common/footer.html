@@ -1,93 +1,171 @@
-{{#if banners.bottom}}
-    <div class="banners" data-banner-location="bottom">
-        {{#each (limit banners.bottom_metadata 1)}}
-            <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
-                <div data-event-type="promotion-click">
-                    {{{this.content}}}
+<footer class="footer" role="contentinfo">
+    <h2 class="footer-title-sr-only">Footer Start</h2>
+    <div class="footer__newsletter">
+        <div class="container">
+            <article class="footer__newsletter-article" data-section-type="newsletterSubscription">
+                <div class="newsletter-bar newsletter-bar--hidden" style="">
+    <div class="newsletter-bar__text">
+        <p>Get the latest updates on new products and upcoming sales</p>
+    </div>
+
+    <form class="form" action="/subscribe.php" method="post">
+        <fieldset class="form-fieldset">
+            <input type="hidden" name="action" value="subscribe">
+            <input type="hidden" name="nl_first_name" value="bc">
+            <input type="hidden" name="check" value="1">
+            <div class="form-field">
+                <label class="form-label is-srOnly" for="nl_bar_email">Email Address</label>
+                <div class="form-prefixPostfix wrap">
+                    <input class="form-input" id="nl_bar_email" name="nl_email" type="email" value="" placeholder="Your email address" aria-describedby="alertBox-message-text" aria-required="true" required="">
+                    <input class="button button--primary form-prefixPostfix-button--postfix" type="submit" value="Subscribe">
                 </div>
             </div>
-        {{/each}}
+        </fieldset>
+    </form>
+
+    <button class="newsletter-bar__close" type="button"><span class="newsletter-bar__close__icon">Close</span></button>
+</div>
+
+<div class="footer__newsletter-content">
+    <h3 class="footer__newsletter-title">Subscribe to our newsletter</h3>
+    <p>Get the latest updates on new products and upcoming sales</p>
+</div>
+
+<form class="form" action="/subscribe.php" method="post">
+    <fieldset class="form-fieldset">
+        <input type="hidden" name="action" value="subscribe">
+        <input type="hidden" name="nl_first_name" value="bc">
+        <input type="hidden" name="check" value="1">
+        <div class="form-field">
+            <label class="form-label is-srOnly" for="nl_email">Email Address</label>
+            <div class="form-prefixPostfix wrap">
+                <input class="form-input" id="nl_email" name="nl_email" type="email" value="" placeholder="Your email address" aria-describedby="alertBox-message-text" aria-required="true" required="">
+                <input class="button button--primary form-prefixPostfix-button--postfix" type="submit" value="Subscribe">
+            </div>
+        </div>
+    </fieldset>
+</form>
+            </article>
+        </div>
     </div>
-{{/if}}
-<footer class="footer" role="contentinfo">
-    <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
     <div class="container">
-        {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
-            <article class="footer-info-col
-                footer-info-col--social
-                footer-info-col--{{#if theme_settings.social_icon_placement_bottom '===' 'bottom_left'}}left{{else}}right{{/if}}"
-                data-section-type="footer-webPages">
-                    <h3 class="footer-info-heading">{{lang 'social.connect'}}</h3>
-                    {{> components/common/social-links}}
-            </article>
-        {{/if}}
         <section class="footer-info">
-            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
-                <h3 class="footer-info-heading">{{lang 'footer.navigate'}}</h3>
+            <article class="footer-info-col" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">Navigate</h3>
                 <ul class="footer-info-list">
-                    {{#each pages}}
-                        <li>
-                            <a href="{{url}}">{{name}}</a>
-                        </li>
-                    {{/each}}
                     <li>
-                        <a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a>
+                        <a href="https://emotionstudios.co.uk/photo-shoots/">Photo Shoots</a>
                     </li>
-                </ul>
-            </article>
-
-            <article class="footer-info-col footer-info-col--small" data-section-type="footer-categories">
-                <h3 class="footer-info-heading">{{lang 'footer.categories'}}</h3>
-                <ul class="footer-info-list">
-                    {{#each categories}}
+                    <li>
+                        <a href="https://emotionstudios.co.uk/your-investment/">Your Investment</a>
+                    </li>
                         <li>
-                            <a href="{{url}}">{{name}}</a>
+                            <a href="https://emotionstudios.co.uk/meet-us/">Meet Us</a>
                         </li>
-                    {{/each}}
-                </ul>
-            </article>
-
-            {{#and theme_settings.shop_by_brand_show_footer shop_by_brand.length}}
-            <article class="footer-info-col footer-info-col--small" data-section-type="footer-brands">
-                <h3 class="footer-info-heading">{{lang 'footer.brands'}}</h3>
-                <ul class="footer-info-list">
-                    {{#each shop_by_brand}}
                         <li>
-                            <a href="{{url}}">{{name}}</a>
+                            <a href="https://emotionstudios.co.uk/the-experience/">The Experience</a>
                         </li>
-                    {{/each}}
-                    <li><a href="{{urls.brands}}">{{lang 'common.view_all'}}</a></li>
+                        <li>
+                            <a href="https://emotionstudios.co.uk/studies/">Studies</a>
+                        </li>
+                        <li>
+                            <a href="https://emotionstudios.co.uk/get-in-touch/">Get In Touch</a>
+                        </li>
+                        <li>
+                            <a href="https://emotionstudios.co.uk/terms/">Terms &amp; Conditions</a>
+                        </li>
                 </ul>
             </article>
-            {{/and}}
 
-            {{#if settings.address}}
-            <article class="footer-info-col footer-info-col--small" data-section-type="storeInfo">
-                <h3 class="footer-info-heading">{{lang 'footer.info'}}</h3>
-                <address>{{nl2br settings.address}}</address>
-                {{#if settings.phone_number}}
-                    <strong>{{lang 'footer.call_us' phone_number=settings.phone_number}}</strong>
-                {{/if}}
+            <article class="footer-info-col" data-section-type="storeInfo">
+                <h3 class="footer-info-heading">Contact Us</h3>
+                <address>Emotion Studios<br>
+Upper Aston Farm<br>
+Upper Aston, Claverley<br>
+Wolverhampton<br>
+WV5 7EE</address>
+                <p>
+                    <a href="mailto:info@emotionstudios.co.uk">info@emotionstudios.co.uk</a><br>
+                    Tel: 01746 710 128
+                </p>
             </article>
-            {{/if}}
 
-            <article class="footer-info-col" data-section-type="newsletterSubscription">
-                {{#if settings.show_newsletter_box}}
-                    {{> components/common/subscription-form}}
-                {{/if}}
-                {{> components/common/payment-icons}}
+            <article class="footer-info-col" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">Follow Us</h3>
+                    <ul class="socialLinks socialLinks--alt">
+            <li class="socialLinks-item">
+                <a href="https://www.facebook.com/emotionstudiosltd" target="_blank" rel="noopener">
+                    facebook
+                </a>
+            </li>
+            <li class="socialLinks-item">
+                <a href="https://www.instagram.com/emotionstudiosuk/" target="_blank" rel="noopener">
+                    instagram
+                </a>
+            </li>
+    </ul>
             </article>
         </section>
-        {{#if theme_settings.show_powered_by}}
             <div class="footer-copyright">
-                <p class="powered-by">{{lang 'footer.powered_by'}} <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>
+                <p class="powered-by">© 2024 Emotion Studios Ltd </p>
             </div>
-        {{/if}}
-        {{#if theme_settings.show_copyright_footer}}
-            <div class="footer-copyright">
-                <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}} </p>
-            </div>
-        {{/if}}
     </div>
-    {{{region name="ssl_site_seal--global"}}}
+    <div data-content-region="ssl_site_seal--global"><div data-layout-id="6c506c24-b6ff-468f-bb0e-7a06cd685c73"><div data-sub-layout-container="ece50b5c-cddc-4b06-b8b1-6bd0e1a10676" data-layout-name="Layout">
+  <style data-container-styling="ece50b5c-cddc-4b06-b8b1-6bd0e1a10676">
+    [data-sub-layout-container="ece50b5c-cddc-4b06-b8b1-6bd0e1a10676"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="ece50b5c-cddc-4b06-b8b1-6bd0e1a10676"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="4b26054f-4103-447a-8e12-8ae4282c5585">
+    <style data-column-styling="4b26054f-4103-447a-8e12-8ae4282c5585">
+      [data-sub-layout="4b26054f-4103-447a-8e12-8ae4282c5585"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 100%;
+        max-width: 100%;
+        z-index: 0;
+        justify-content: center;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="4b26054f-4103-447a-8e12-8ae4282c5585"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="4b26054f-4103-447a-8e12-8ae4282c5585"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="6c11ad63-9703-4dbe-8502-bb62257a3b28" data-placement-id="257536de-91b4-404f-ba65-f7d1b6b82107" data-placement-status="ACTIVE"><style>.glide__bullets { display: none!important; }</style>
+</div>
+  </div>
+</div></div></div>
+</footer>
 </footer>
