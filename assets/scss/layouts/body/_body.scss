@@ -4027,28 +4027,41 @@ html {
     }
 }
 .button {
-    line-height: 1rem;
-    transition: all 0.15s ease 0s;
+    background: #bfa380;
+    padding: 1.125rem;
+    border: 1px solid #bfa380;
+    border-radius: 0;
+    font-family: Lato,Arial,Helvetica,sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out
 }
-.button {
-    appearance: none;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    font-family: Montserrat, Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0px 0px 1rem;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    background-color: transparent;
-    border-color: rgb(143, 143, 143);
-    color: rgb(102, 102, 102);
-    font-size: 1rem;
-    padding: 0.85714rem 2.28571rem;
-    border-radius: 4px;
-    outline: none;
-    vertical-align: middle;
+
+.button:focus,.button:hover {
+    background: #383640;
+    color: #fff;
+    border-color: #383640
+}
+
+.button--secondary {
+    background: #fff;
+    border: 1px solid #383640;
+    color: #383640
+}
+
+.button--secondary:focus,.button--secondary:hover {
+    background: #383640;
+    color: #fff;
+    border-color: #383640
+}
+
+.button--booking {
+    width: 100%
+}
+
+input.button[class] {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 50px
 }
